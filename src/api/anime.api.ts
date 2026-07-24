@@ -1,5 +1,5 @@
-import { anilistClient } from "@/plugins/anilist";
-import { gql } from "graphql-request";
+import { gql } from 'graphql-request'
+import { anilistClient } from '@/plugins/anilist'
 
 export async function getAnime (id: number): Promise<any> {
   const query = gql`
@@ -10,12 +10,47 @@ export async function getAnime (id: number): Promise<any> {
           romaji
           english
           native
-        }
-        season 
+        },
+        format
+        season
         seasonYear
-
-
-      
+        studios {
+          nodes {
+            name
+          }
+        }
+        genres
+        startDate {
+          month
+          day
+          year
+        }
+        endDate {
+          month
+          day
+          year
+        }
+        type
+        episodes
+        duration
+        source
+        averageScore
+        popularity
+        bannerImage
+        recommendations {
+            nodes {
+              id
+              media {
+                id
+                title {
+                  english
+                }
+                coverImage {
+                  medium
+                }
+              }
+            }
+          }
       }
     }
   `
